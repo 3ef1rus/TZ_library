@@ -1,0 +1,72 @@
+[
+    {
+        "id": "202ce42485364b1bbbc4563b749af8d4",
+        "title": "Война и мир",
+        "author": "Лев Толстой",
+        "year": 1869,
+        "status": true
+    },
+    {
+        "id": "a3dc30e534f24d8f89b34da444a6be7c",
+        "title": "Преступление и наказание",
+        "author": "Фёдор Достоевский",
+        "year": 1866,
+        "status": true
+    },
+    {
+        "id": "943b8d891ff44290b66acbfaa7dd87cc",
+        "title": "Мастер и Маргарита",
+        "author": "Михаил Булгаков",
+        "year": 1967,
+        "status": true
+    },
+    {
+        "id": "3d81c71221a64bdea25a816a39826a7c",
+        "title": "Сто лет одиночества",
+        "author": "Габриэль Гарсиа Маркес",
+        "year": 1967,
+        "status": true
+    },
+    {
+        "id": "c101dd1b88e54e70b2e9ee95a666b3d4",
+        "title": "1984",
+        "author": "Джордж Оруэлл",
+        "year": 1949,
+        "status": true
+    },
+    {
+        "id": "f0848f1a53a3492f89ed165c54ea508d",
+        "title": "Божественная комедия",
+        "author": "Данте Алигьери",
+        "year": 1321,
+        "status": true
+    },
+    {
+        "id": "3b049ae026464c34b98a7d80b6c8fb35",
+        "title": "Гордость и предубеждение",
+        "author": "Джейн Остин",
+        "year": 1813,
+        "status": true
+    },
+    {
+        "id": "caae11d65bac46e68ef76b98d6551be6",
+        "title": "Лолита",
+        "author": "Владимир Набоков",
+        "year": 1955,
+        "status": true
+    },
+    {
+        "id": "45c40e1688eb4157ab0eccd66c7b150d",
+        "title": "Моби Дик",
+        "author": "Герман Мелвилл",
+        "year": 1851,
+        "status": true
+    },
+    {
+        "id": "886dd68ff2ff478888a8e0235cd8f655",
+        "title": "Маленький принц",
+        "author": "Антуан де Сент-Экзюпери",
+        "year": 1943,
+        "status": true
+    }
+]

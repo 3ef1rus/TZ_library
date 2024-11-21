@@ -1,10 +1,9 @@
 import uuid
 import typing
-
-
+from data import save_books_to_json
 class Book:
     def __init__(self,title, author, year):
-        self.id:uuid.UUID=uuid.uuid4()
+        self.id:uuid.UUID.hex=uuid.uuid4().hex
         self.title:str = title
         self.author:str = author
         self.year:int = year
@@ -36,7 +35,7 @@ books = [
     Book("Моби Дик", "Герман Мелвилл", year=1851),
     Book("Маленький принц", "Антуан де Сент-Экзюпери", year=1943),
 ]
-library = Library()
-for el in books:
-    library.add_book(el.title,el.author,el.year)
+
+save_books_to_json(books, 'template_books.json')
+
 
