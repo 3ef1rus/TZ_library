@@ -18,7 +18,7 @@
         "title": "Мастер и Маргарита",
         "author": "Михаил Булгаков",
         "year": 1967,
-        "status": true
+        "status": false
     },
     {
         "id": "3d81c71221a64bdea25a816a39826a7c",
@@ -39,7 +39,7 @@
         "title": "Божественная комедия",
         "author": "Данте Алигьери",
         "year": 1321,
-        "status": true
+        "status": false
     },
     {
         "id": "3b049ae026464c34b98a7d80b6c8fb35",
@@ -67,6 +67,6 @@
         "title": "Маленький принц",
         "author": "Антуан де Сент-Экзюпери",
         "year": 1943,
-        "status": true
+        "status": false
     }
 ]
