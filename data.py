@@ -1,7 +1,7 @@
 import json
 
 def read_from_file(filename:str)->list:
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding='utf-8') as f:
         json_data = json.load(f)
     return json_data
 
