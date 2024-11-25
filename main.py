@@ -72,7 +72,7 @@ class Library:
 
     def show_all_books(self):
         for book in self.books:
-            book.show()
+            book.show_book()
 
 
     def change_status_book(self, book_id:uuid.UUID,status:str)->None:
@@ -89,21 +89,21 @@ class Library:
         if title is not None:
             for book in self.books:
                 if book.title == title:
-                    book.show()
+                    book.show_book()
             print("Книги с таким название не найдена")
             return
 
         if author is not None:
             for book in self.books:
                 if book.author == author:
-                    book.show()
+                    book.show_book()
             print("Книги с автором не найдена")
             return
 
         if year is not None:
             for book in self.books:
                 if book.year == year:
-                    book.show()
+                    book.show_book()
             print("Книги такого когда выпуска не найдена")
             return
 
@@ -112,7 +112,8 @@ class Library:
 library = Library()
 library.load_books_from_file()
 # library.add_book("Гарри Поттер и философский камень","Дж.К. Роулинг","1997")
+# library.show_all_books()
+# library.delete_book("547d13d9edc24cc9b4fe0478fe59a235")
+# library.delete_book("886dd68ff2ff478888a8e0235cd8f655")
 library.show_all_books()
-library.delete_book("547d13d9edc24cc9b4fe0478fe59a235")
-library.delete_book("886dd68ff2ff478888a8e0235cd8f655")
-library.show_all_books()
+library.search_book(year=1967)
