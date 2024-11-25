@@ -76,26 +76,38 @@ class Library:
 
 
     def change_status_book(self, book_id:uuid.UUID,status:str)->None:
-        data=True if status=="В наличии" else False
+        data=True if status == "В наличии" else False
         for book in self.books:
             if book.id == book_id:
                 book.change_status(True)
-                print("")
-                return True
+                print("Статус изменен")
+                return
         print(f"Книги с id {book_id} не существует")
 
-# books = [
-#     Book("Война и мир", "Лев Толстой", year=1869),
-#     Book("Преступление и наказание", "Фёдор Достоевский", year=1866),
-#     Book("Мастер и Маргарита", "Михаил Булгаков", year=1967),
-#     Book("Сто лет одиночества", "Габриэль Гарсиа Маркес", year=1967),
-#     Book("1984", "Джордж Оруэлл", 1949),
-#     Book("Божественная комедия", "Данте Алигьери", year=1321),
-#     Book("Гордость и предубеждение", "Джейн Остин", year=1813),
-#     Book("Лолита", "Владимир Набоков", year=1955),
-#     Book("Моби Дик", "Герман Мелвилл", year=1851),
-#     Book("Маленький принц", "Антуан де Сент-Экзюпери", year=1943),
-# ]
+
+    def search_book(self,title=None,author=None,year=None):
+        if title is not None:
+            for book in self.books:
+                if book.title == title:
+                    book.show()
+            print("Книги с таким название не найдена")
+            return
+
+        if author is not None:
+            for book in self.books:
+                if book.author == author:
+                    book.show()
+            print("Книги с автором не найдена")
+            return
+
+        if year is not None:
+            for book in self.books:
+                if book.year == year:
+                    book.show()
+            print("Книги такого когда выпуска не найдена")
+            return
+
+
 # save_books_to_json(books, 'template_books.json')
 library = Library()
 library.load_books_from_file()
