@@ -33,7 +33,7 @@ def back() -> True:
 
 
 def clear_console():
-    # ANSI escape sequence для очистки экрана
+
     if os.name == 'nt':
         _ = os.system('cls')
     else:
@@ -58,6 +58,20 @@ def get_year() -> str:
     return year
 
 
+def get_book_id() -> str:
+    book_id = input("Введите id книги: ")
+    return book_id
+
+
+def get_status() -> str:
+    status = input("Введите новый статус: ")
+    return status
+
+
+def get_filename() -> str:
+    filename=input("Введите название файла: ")
+    return filename
+
 def main_menu():
     library = Library()
     while True:
@@ -79,12 +93,12 @@ def main_menu():
             title = get_title()
             author = get_author()
             year = get_year()
-            library.add_book(title, author, year)
+            library.add_book(title, author, int(year))
             back()
 
         elif choice == '2':
             clear_console()
-            book_id = input("Введите id книги которую вы хотите удалить: ")
+            book_id = get_book_id()
             library.delete_book(book_id)
             back()
 
@@ -100,21 +114,27 @@ def main_menu():
 
         elif choice == '5':
             clear_console()
-            book_id = input("Введите id книги статус которой вы хотите изменить: ")
-            status = input("Введите новый статус")
+            book_id = get_book_id()
+            status = get_status()
             library.change_status_book(book_id, status)
+            back()
 
         elif choice == '6':
             clear_console()
-            # Код для действия 2
-            print("Вы выбрали действие 6")
+            filename = get_filename()
+            library.load_books_from_file(filename)
+            back()
+
         elif choice == '7':
             clear_console()
-            # Код для действия 2
-            print("Вы выбрали действие 7")
+            filename=get_filename()
+            library.save_books_to_file(filename)
+            back()
+
         elif choice == '8':
             clear_console()
             print("Выход...")
             break
+
         else:
             print("Неверный выбор. Попробуйте снова.")
