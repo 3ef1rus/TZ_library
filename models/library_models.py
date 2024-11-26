@@ -1,7 +1,7 @@
 import uuid
 from typing import List, Optional, Union
 from data.data import save_books_to_json, read_from_file
-from book_models import Book
+from models.book_models import Book
 
 
 class Library:
@@ -31,8 +31,9 @@ class Library:
             year: int
     ) -> str:
         self.books.append(Book(title, author, year))
+        print("Книга добавлена")
 
-    def delete_book(self, book_id: uuid.UUID) -> str:
+    def delete_book(self, book_id: str) -> str:
         for book in self.books:
             if book.id == book_id:
                 self.books.remove(book)
