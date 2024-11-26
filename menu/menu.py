@@ -33,7 +33,6 @@ def back() -> True:
 
 
 def clear_console():
-
     if os.name == 'nt':
         _ = os.system('cls')
     else:
@@ -69,8 +68,18 @@ def get_status() -> str:
 
 
 def get_filename() -> str:
-    filename=input("Введите название файла: ")
+    filename = input("Введите название файла: ")
     return filename
+
+
+def get_mode_search() -> str:
+    print("Выберите по какому критерию искать книгу: "
+          "1.Название"
+          "2.Автор"
+          "3.Дата издания")
+    mode = input("Введите номер критерия: ")
+    return mode
+
 
 def main_menu():
     library = Library()
@@ -104,8 +113,17 @@ def main_menu():
 
         elif choice == '3':
             clear_console()
-            # Код для действия 2
-            print("Вы выбрали действие 3")
+            mode=get_mode_search()
+            if mode == '1':
+                title = get_title()
+                library.search_book(title)
+            elif mode == '2':
+                author = get_author()
+                library.search_book(author)
+            elif mode == '3':
+                book_id = get_book_id()
+                library.search_book(book_id)
+            back()
 
         elif choice == '4':
             clear_console()
@@ -127,7 +145,7 @@ def main_menu():
 
         elif choice == '7':
             clear_console()
-            filename=get_filename()
+            filename = get_filename()
             library.save_books_to_file(filename)
             back()
 
