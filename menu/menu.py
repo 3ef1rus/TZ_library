@@ -1,5 +1,30 @@
 from models.library_models import Library
+from validation.validation_att import validation_year, validation_author, validation_title
 import os
+
+
+def retry_input(max_attempts=3):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            attempts = max_attempts
+            while attempts > 0:
+                result = func(*args, **kwargs)
+                if func.__name__ == 'get_title':
+                    if validation_title(result):
+                        return result
+                if func.__name__ == 'get_author':
+                    if validation_author(result):
+                        return result
+                if func.__name__ == 'get_year':
+                    if validation_year(result):
+                        return result
+                attempts -= 1
+                print(f"Осталось {attempts} попыток.")
+            return print("Попытки закончились , возврат в главное меню ...")
+
+        return wrapper
+
+    return decorator
 
 
 def back() -> True:
@@ -13,6 +38,24 @@ def clear_console():
         _ = os.system('cls')
     else:
         _ = os.system('clear')
+
+
+@retry_input()
+def get_title() -> str:
+    title = input("Введите название книги: ")
+    return title
+
+
+@retry_input()
+def get_author() -> str:
+    author = input("Введите автора книги: ")
+    return author
+
+
+@retry_input()
+def get_year() -> str:
+    year = input("Введите дату издания: ")
+    return year
 
 
 def main_menu():
@@ -33,10 +76,10 @@ def main_menu():
 
         if choice == '1':
             clear_console()
-            title = input("Введите название книги: ")
-            author = input("Введите автора книги: ")
-            year = input("Введите дату издания: ")
-            library.add_book(title,author, year)
+            title = get_title()
+            author = get_author()
+            year = get_year()
+            library.add_book(title, author, year)
             back()
 
         elif choice == '2':
@@ -57,8 +100,8 @@ def main_menu():
 
         elif choice == '5':
             clear_console()
-            book_id=input("Введите id книги статус которой вы хотите изменить: ")
-            status=input("Введите новый статус")
+            book_id = input("Введите id книги статус которой вы хотите изменить: ")
+            status = input("Введите новый статус")
             library.change_status_book(book_id, status)
 
         elif choice == '6':
