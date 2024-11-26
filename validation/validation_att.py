@@ -1,25 +1,39 @@
 import re
 
-def validation_title(title) -> bool:
-    if not title:
-        print("Поле не может быть пустым")
+
+def validation_title(title: str) -> bool:
+    try:
+        if not title:
+            raise ValueError("Поле не может быть пустым")
+        return True
+    except ValueError as e:
+        print(e)
         return False
 
 
-def validation_author(author) -> bool:
-    if not author:
-        print("Поле не может быть пустым")
+def validation_author(author: str) -> bool:
+    try:
+        if not author:
+            raise ValueError("Поле не может быть пустым")
+
+        pattern = r'^[а-яА-ЯёЁ\s-]{2,50}$'
+        if bool(re.match(pattern, author)) is True:
+            return True
+        else:
+            raise ValueError("Неправильный формат имени")
+    except ValueError as e:
+        print(e)
         return False
 
-    pattern = r'^[а-яА-Я\s-]+$'
-    return bool(re.match(pattern, author))
 
+def validation_year(year: str) -> bool:
+    try:
+        if not year:
+            raise ValueError("Поле не может быть пустым")
 
-def validation_year(year) -> bool:
-    if not year:
-        print("Поле не может быть пустым")
-        return False
-
-    if not year.isdigit():
-        print("Поле не может содержать символы")
+        if not int(year):
+            raise ValueError("Поле не может содержать символы")
+        return True
+    except ValueError as e:
+        print(e)
         return False
