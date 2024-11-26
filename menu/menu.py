@@ -32,7 +32,7 @@ def back() -> True:
     return True
 
 
-def clear_console():
+def clear_console() -> None:
     if os.name == 'nt':
         _ = os.system('cls')
     else:
@@ -81,7 +81,7 @@ def get_mode_search() -> str:
     return mode
 
 
-def main_menu():
+def main_menu() -> None:
     library = Library()
     while True:
         clear_console()
@@ -113,7 +113,7 @@ def main_menu():
 
         elif choice == '3':
             clear_console()
-            mode=get_mode_search()
+            mode = get_mode_search()
             if mode == '1':
                 title = get_title()
                 library.search_book(title)

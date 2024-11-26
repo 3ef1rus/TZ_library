@@ -12,12 +12,12 @@ class Book:
             id: Optional[Union[uuid.UUID, str]] = None,
             status: Optional[bool] = None
     ) -> None:
-        self.title = title
-        self.author = author
-        self.year = year
+        self.title: str = title
+        self.author: str = author
+        self.year: int = year
 
         if id is None:
-            self.id = uuid.uuid4().hex
+            self.id: Union[uuid.UUID, str] = uuid.uuid4().hex
         else:
             self.id = id
         if status is None:
