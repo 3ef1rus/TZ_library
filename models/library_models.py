@@ -1,5 +1,4 @@
-import uuid
-from typing import List, Optional, Union
+from typing import List
 from data.data import save_books_to_json, read_from_file
 from models.book_models import Book
 
@@ -19,21 +18,22 @@ class Library:
                         status=book_data["status"]
                         )
             self.books.append(book)
-
+        print("Все книги загружены")
     def save_books_to_file(self, filename) -> None:
         books_data = [book.__dict__ for book in self.books]
         save_books_to_json(data=books_data, filename=filename)
+        return print("Все книги сохранены")
 
     def add_book(
             self,
             title: str,
             author: str,
             year: int
-    ) -> str:
+    ) -> None:
         self.books.append(Book(title, author, year))
-        print("Книга добавлена")
+        return print("Книга добавлена")
 
-    def delete_book(self, book_id: str) -> str:
+    def delete_book(self, book_id: str) -> None:
         for book in self.books:
             if book.id == book_id:
                 self.books.remove(book)
@@ -45,16 +45,15 @@ class Library:
         for book in self.books:
             book.show_book()
 
-    def change_status_book(self, book_id: uuid.UUID, status: str) -> str:
+    def change_status_book(self, book_id: str, status: str) -> None:
         data = True if status == "В наличии" else False
         for book in self.books:
             if book.id == book_id:
                 book.change_status(data)
-                print("Статус изменен")
-                return
-        print(f"Книги с id {book_id} не существует")
+                return print("Статус изменен")
+        return print(f"Книги с id {book_id} не существует")
 
-    def search_book(self, title=None, author=None, year=None) -> str:
+    def search_book(self, title=None, author=None, year=None) -> None:
         count = 0
         if title is not None:
             for book in self.books:
