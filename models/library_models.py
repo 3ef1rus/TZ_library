@@ -26,8 +26,16 @@ class Library:
         Raises:
             ValueError: Если файл не найден или данные в файле неверны.
         """
+
         data = read_from_file(filename=filename)
+
+        required_fields = ["title", "author", "year", "id", "status"]
+
         for book_data in data:
+            if not all(field in book_data for field in required_fields):
+                print(f"Ошибка в данных книги: отсутствуют обязательные поля. Книга пропущена.")
+                continue
+
             book = Book(title=book_data["title"],
                         author=book_data["author"],
                         year=book_data["year"],
@@ -35,6 +43,7 @@ class Library:
                         status=book_data["status"]
                         )
             self.books.append(book)
+
         print("Все книги загружены")
 
     def save_books_to_file(self, filename: str) -> None:
