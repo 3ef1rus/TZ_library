@@ -15,6 +15,7 @@ class Library:
     def __init__(self) -> None:
         """Инициализирует пустой список книг."""
         self.books: List[Book] = []
+        self.book_ids: set = set()
 
     def load_books_from_file(self, filename: str) -> None:
         """
@@ -42,7 +43,12 @@ class Library:
                         id=book_data["id"],
                         status=book_data["status"]
                         )
+            if book.id in self.book_ids:
+                print(f"ID уже существует, книга \"{book.title}\" будет пропущена")
+
             self.books.append(book)
+            self.book_ids.add(book.id)
+
 
         print("Все книги загружены")
 
