@@ -10,22 +10,32 @@ class Library:
 
     Attributes:
         books (list[Book]): Список объектов Book, содержащих информацию о каждой книге.
+        book_ids (set()): Множество set, содержит уникальные идентификаторы книг.
     """
 
     def __init__(self) -> None:
-        """Инициализирует пустой список книг."""
+        """
+        Инициализирует пустой список книг и пустое множество id книг.
+
+        """
         self.books: List[Book] = []
         self.book_ids: set = set()
 
     def load_books_from_file(self, filename: str) -> None:
-        """
-        Загружает книги из JSON-файла.
+        """Загружает книги из указанного JSON-файла в коллекцию книг.
+
+        Каждая строка в файле должна представлять книгу в формате JSON с полями:
+        "title", "author", "year", "id", "status". ID книги должен быть уникальным.
 
         Args:
-            filename (str): Имя JSON-файла, содержащего данные о книгах.
+            filename (str): Путь к JSON-файлу с данными о книгах.
 
         Raises:
-            ValueError: Если файл не найден или данные в файле неверны.
+            FileNotFoundError: Если указанный файл не найден.
+            ValueError:
+                - Если формат данных в файле не соответствует JSON.
+                - Если в записи отсутствуют обязательные поля.
+                - Если ID книги уже существует.
         """
 
         data = read_from_file(filename=filename)
@@ -44,7 +54,7 @@ class Library:
                         status=book_data["status"]
                         )
             if book.id in self.book_ids:
-                print(f"ID уже существует, книга \"{book.title}\" будет пропущена")
+                raise ValueError(f"ID уже существует, книга \"{book.title}\" будет пропущена")
 
             self.books.append(book)
             self.book_ids.add(book.id)
