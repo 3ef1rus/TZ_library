@@ -4,6 +4,20 @@ import os
 
 
 def retry_input(max_attempts=3):
+    """
+    Повторяет выполнение функции указанное количество раз, если результат не проходит валидацию.
+
+    Args:
+        max_attempts (int, optional): Максимальное количество попыток повторения. По умолчанию равно 3.
+
+    Returns:
+        function: Декорированная функция.
+
+    Декоратор проверяет имя функции и вызывает соответствующую функцию валидации.
+    Если валидация не проходит, функция повторяется до `max_attempts` раз.
+    Если все попытки не увенчались успехом, выводится сообщение об ошибке.
+    """
+
     def decorator(func):
         def wrapper(*args, **kwargs):
             attempts = max_attempts
@@ -33,6 +47,7 @@ def back() -> True:
 
 
 def clear_console() -> None:
+    """Отчищает консоль в зависимости от операционной системы"""
     if os.name == 'nt':
         _ = os.system('cls')
     else:
@@ -72,16 +87,50 @@ def get_filename() -> str:
     return filename
 
 
-def get_mode_search() -> str:
-    print("Выберите по какому критерию искать книгу: "
-          "1.Название"
-          "2.Автор"
-          "3.Дата издания")
-    mode = input("Введите номер критерия: ")
-    return mode
+def get_mode_search() -> int:
+    """
+    Запрашивает у пользователя критерий поиска книги.
+
+    Returns:
+        int: Код выбранного критерия (1 - название, 2 - автор, 3 - дата издания).
+
+    Raises:
+        ValueError: Если пользователь ввел некорректный номер критерия или не число.
+    """
+
+    while True:
+        print("Выберите по какому критерию искать книгу:")
+        print("1. Название")
+        print("2. Автор")
+        print("3. Дата издания")
+
+        mode = input("Введите номер критерия: ")
+        try:
+            mode = int(mode)
+            if 1 <= mode <= 3:
+                return mode
+            else:
+                print("Некорректный номер критерия. Попробуйте снова.")
+        except ValueError:
+            print("Вы ввели не число. Попробуйте снова.")
 
 
 def main_menu() -> None:
+    """
+    Отображает главное меню библиотеки и обрабатывает пользовательский выбор.
+
+    Функция циклически отображает меню с доступными действиями:
+    1. Добавить книгу
+    2. Удалить книгу
+    3. Найти книгу
+    4. Отобразить все книги
+    5. Изменить статус книги
+    6. Загрузить книги из файла
+    7. Сохранить книги в файл
+    8. Выход
+
+    Пользователь выбирает действие, и функция выполняет соответствующую операцию.
+    """
     library = Library()
     while True:
         clear_console()
@@ -114,13 +163,13 @@ def main_menu() -> None:
         elif choice == '3':
             clear_console()
             mode = get_mode_search()
-            if mode == '1':
+            if mode == 1:
                 title = get_title()
                 library.search_book(title)
-            elif mode == '2':
+            elif mode == 2:
                 author = get_author()
                 library.search_book(author)
-            elif mode == '3':
+            elif mode == 3:
                 book_id = get_book_id()
                 library.search_book(book_id)
             back()

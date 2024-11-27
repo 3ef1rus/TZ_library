@@ -3,6 +3,18 @@ import uuid
 
 
 class Book:
+    """
+   Представляет книгу в библиотеке.
+
+   Атрибуты:
+       title (str): Название книги.
+       author (str): Автор книги.
+       year (int): Год издания книги.
+       id (Union[uuid.UUID, str]): Уникальный идентификатор книги
+                                   (генерируется автоматически, если не указан).
+       status (bool, optional): Статус книги (True - в наличии, False - выдана).
+                                 По умолчанию True.
+    """
 
     def __init__(
             self,
@@ -26,6 +38,16 @@ class Book:
             self.status = status
 
     def show_book(self) -> None:
+        """
+        Отображает информацию о книге.
+
+        Печатает на консоль следующую информацию:
+            * id книги
+            * Название книги
+            * Автор книги
+            * Год издания
+            * Состояние книги (в наличии или выдана)
+        """
         status = "В наличии" if self.status is True else "Выдана"
         print(f"id книги: {self.id},"
               f" Название книги: {self.title},"
@@ -34,4 +56,10 @@ class Book:
               f" Состояние книги: {status}")
 
     def change_status(self, status: bool) -> None:
+        """
+       Изменяет статус книги (в наличии/выдана).
+
+       Args:
+           status (bool): Новый статус книги (True - в наличии, False - выдана).
+        """
         self.status = status
