@@ -14,9 +14,11 @@ def read_from_file(filename: str) -> list[dict]:
 
     Returns:
         list[dict]: Список словарей, представляющих данные из JSON-файла.
+        В случае ошибки возвращается пустой список.
 
     Raises:
         Exception: В случае возникновения ошибок при записи в файл.
+
     """
     try:
         with open(filename, 'r', encoding='utf-8') as f:
@@ -24,6 +26,7 @@ def read_from_file(filename: str) -> list[dict]:
         return json_data
     except Exception as e:
         print(f"Произошла ошибка при работе с JSON-данных: {e}")
+        return []
 
 
 def save_to_json(data: list[dict], filename: str) -> None:
