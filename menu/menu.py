@@ -157,8 +157,14 @@ def main_menu() -> None:
         elif choice == '2':
             clear_console()
             book_id = get_book_id()
-            library.delete_book(book_id)
-            back()
+            library.search_book(book_id)
+            delete=input("Вы действительно хотите удалить книгу эту книгу ? (y/n)")
+            if delete == 'y':
+                library.delete_book(book_id)
+                back()
+            else:
+                print("Возврат в главное меню")
+                back()
 
         elif choice == '3':
             clear_console()
@@ -170,8 +176,8 @@ def main_menu() -> None:
                 author = get_author()
                 library.search_book(author)
             elif mode == 3:
-                book_id = get_book_id()
-                library.search_book(book_id)
+                year = get_year()
+                library.search_book(year)
             back()
 
         elif choice == '4':
